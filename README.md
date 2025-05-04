@@ -1,14 +1,33 @@
-# Astro Starter Kit: Minimal
+# Astro Multilingual Template
 
-```sh
-npm create astro@latest -- --template minimal
+A simple template with multiple language support. 
+This template recognizes user's browser language and redirects to the appropriate locale.
+
+## 🌤️ Cloudflare Support 🌤️
+
+This template uses 'Cloudflare' adapter.
+That means each page will be rendered on demand unless you add '**export const prerender = true;**' to the page.
+If you don't want to use an adapter, you should remove following code from the '**astro.config.mjs**'
 ```
+  output: 'server',
+  adapter: cloudflare({
+    platformProxy: {enabled: true}
+  }),
+```
+If you don't use any adapters, then all of the pages will be pre-rendered by default so there is no need to add '**export const prerender = true;**' to the page.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## 🫱 Cloudflare Redirect 
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The user's browser language recognition and redirect does not work when deployed on Cloudflare by default.
+We have to create a Transform Rule that will check user's browser language and redirect to appropriate url.
+Here's the image representing that step:
+ ![Cloudflare Redirect](https://imagedelivery.net/Ap_RIQMnvK_LYOq1vIFisQ/62b0f7ee-264f-4559-5135-ad1e23e68d00/public)
+
+In this rule, we are checking if the path is "https://dashcruisedev.com/" which is the home page.
+We also check the Accept-Language Request Header. It is an array of user's preffered locale.
+In this case we check if the first element of this array is "pl".
+If so, we want to redirect the user to "https://dashcruisedev.com/pl/".
+Since the redirect happens on the edge runtime, it doesn't negatively impact performance.
 
 ## 🚀 Project Structure
 
