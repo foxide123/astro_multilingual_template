@@ -29,6 +29,11 @@ In this case we check if the first element of this array is "pl".
 If so, we want to redirect the user to "https://dashcruisedev.com/pl/".
 Since the redirect happens on the edge runtime, it doesn't negatively impact performance.
 
+## Update Relevant Files:
+
+1. wrangler.toml
+- Update name of the project
+
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
